@@ -6,6 +6,8 @@ See original repo notes in https://github.com/AliaksandrSiarohin/first-order-mod
 
 ## Petteri's notes for getting the repo to work 
 
+The original repo was quite easy to get it running and nicely documented, this just added the audio to the output. TODO! put everything behiund a single Python call on command window so there are no separate steps.
+
 ### Pre-prerequisites
 
 * Install [Anaconda3](https://www.anaconda.com/products/individual#windows) (if you have other Python 3.8 already, that is fine) ([installation instructions](https://docs.anaconda.com/anaconda/install/windows/))
