@@ -33,6 +33,8 @@ pip install -r requirements.txt
 
 Check the one matching your OS and GPU situation
 
+![learn to code](doc/pytorch.png)
+
 https://pytorch.org/
 
 e.g. for Ubuntu 18.04 with a NVIDIA GPU
