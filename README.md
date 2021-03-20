@@ -6,6 +6,15 @@ See original repo notes in https://github.com/AliaksandrSiarohin/first-order-mod
 
 ## Petteri's notes for getting the repo to work 
 
+### Pre-prerequisites
+
+* Install [Anaconda3](https://www.anaconda.com/products/individual#windows) (if you have other Python 3.8 already, that is fine) ([installation instructions](https://docs.anaconda.com/anaconda/install/windows/))
+* Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), if you are `pull`ing this repo (you could just download the zip as well if you really do not know what this is)
+* Install [`ffmpeg`](https://ffmpeg.org/download.html) 
+* GO to terminal / command window here and execute the commands from there
+
+### Clone this repository
+
 ```bash
 git clone https://github.com/petteriTeikari/first-order-model-wrapper
 cd first-order-model-wrapper
@@ -34,9 +43,7 @@ pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f htt
 
 ### Other tasks to do 
 
-* Download [`vox-cpk.pth.tar`](https://drive.google.com/file/d/1_v_xW1V52gZCZnXgh1Ap_gwA9YVIzUnS/view?usp=sharing) for face animation (provided by the original authors), and place to e.g. `/checkpoints`
-
-* Download [`fashion.pth.tar`](https://drive.google.com/file/d/1RSekVOZxwAe_G48iEUd4pjg1kzHjnnUC/view?usp=sharing) for the full-body animation (provided by the original authors)
+* Download [`vox-cpk.pth.tar`](https://drive.google.com/file/d/1_v_xW1V52gZCZnXgh1Ap_gwA9YVIzUnS/view?usp=sharing) for face animation (provided by the original authors), and place the file to the subfolder `checkpoints`
 
 * For cropping and preprocessing a youtube video (to get the face from it), you need to install [`face-alignment`](https://github.com/1adrianb/face-alignment) library (comes as preloaded with [an issue fixed for you]()):
 
@@ -50,6 +57,8 @@ cd ..
 ### How to animate a static face from an image
 
 TODO! Maybe make a nicer wrapper and do all on one-go
+
+![](doc/workflow.png)
 
 #### Prerequisite 1) Crop your static image 
 
@@ -91,7 +100,7 @@ Around real-time processing with `NVIDIA RTX 2070 Super`, i.e. 33.34 fps, `100%|
 
 #### TODO! 
 
-You could probably want just one call for all this, i.e. you are annoyed by this :P
+You could probably want just one call for all these steps, i.e. you are annoyed by all the cropping calls :P
 
 ![learn to code](doc/learn_to_code.png)
 
