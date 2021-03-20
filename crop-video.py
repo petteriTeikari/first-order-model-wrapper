@@ -11,20 +11,22 @@ import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
 
+import time
+from datetime import timedelta
+
 def extract_bbox(frame, fa):
+
     if max(frame.shape[0], frame.shape[1]) > 640:
         scale_factor =  max(frame.shape[0], frame.shape[1]) / 640.0
         frame = resize(frame, (int(frame.shape[0] / scale_factor), int(frame.shape[1] / scale_factor)))
         frame = img_as_ubyte(frame)
     else:
         scale_factor = 1
-    frame = frame[..., :3]
+    frame = frame[..., :3] # numpy.ndarray
     bboxes = fa.face_detector.detect_from_image(frame[..., ::-1])
     if len(bboxes) == 0:
         return []
     return np.array(bboxes)[:, :-1] * scale_factor
-
-
 
 def bb_intersection_over_union(boxA, boxB):
     xA = max(boxA[0], boxB[0])
@@ -82,6 +84,7 @@ def compute_bbox_trajectories(trajectories, fps, frame_shape, args):
 
 
 def process_video(args):
+
     device = 'cpu' if args.cpu else 'cuda'
     fa = face_alignment.FaceAlignment(face_alignment.LandmarksType._2D, flip_input=False, device=device)
     video = imageio.get_reader(args.inp)
@@ -138,6 +141,7 @@ def process_video(args):
 
 
 if __name__ == "__main__":
+
     parser = ArgumentParser()
 
     parser.add_argument("--image_shape", default=(256, 256), type=lambda x: tuple(map(int, x.split(','))),
@@ -145,13 +149,16 @@ if __name__ == "__main__":
     parser.add_argument("--increase", default=0.1, type=float, help='Increase bbox by this amount')
     parser.add_argument("--iou_with_initial", type=float, default=0.25, help="The minimal allowed iou with inital bbox")
     parser.add_argument("--inp", required=True, help='Input image or video')
-    parser.add_argument("--min_frames", type=int, default=150,  help='Minimum number of frames')
+    parser.add_argument("--min_frames", type=int, default=25,  help='Minimum number of frames')
     parser.add_argument("--cpu", dest="cpu", action="store_true", help="cpu mode.")
-
 
     args = parser.parse_args()
 
+    start_time = time.monotonic()
     commands = process_video(args)
+    end_time = time.monotonic()
+    print('Crop parameters defined in {}'.format(timedelta(seconds=end_time - start_time)))
+
     for command in commands:
         print (command)
 

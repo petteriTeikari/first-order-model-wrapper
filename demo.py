@@ -16,7 +16,10 @@ from modules.generator import OcclusionAwareGenerator
 from modules.keypoint_detector import KPDetector
 from animate import normalize_kp
 from scipy.spatial import ConvexHull
+import moviepy.editor as mp
 
+import time
+from datetime import timedelta
 
 if sys.version_info[0] < 3:
     raise Exception("You must use Python 3 or higher. Recommended version is Python 3.7")
@@ -139,10 +142,19 @@ if __name__ == "__main__":
         pass
     reader.close()
 
+    # Keep the audio as well with MoviePy
+    my_clip = mp.VideoFileClip(opt.driving_video)
+    audio_track = my_clip.audio
+
     source_image = resize(source_image, (256, 256))[..., :3]
     driving_video = [resize(frame, (256, 256))[..., :3] for frame in driving_video]
-    generator, kp_detector = load_checkpoints(config_path=opt.config, checkpoint_path=opt.checkpoint, cpu=opt.cpu)
 
+    start_time = time.monotonic()
+    generator, kp_detector = load_checkpoints(config_path=opt.config, checkpoint_path=opt.checkpoint, cpu=opt.cpu)
+    end_time = time.monotonic()
+    print('Loaded pretrained model checkpoint in {}'.format(timedelta(seconds=end_time - start_time)))
+
+    start_time = time.monotonic()
     if opt.find_best_frame or opt.best_frame is not None:
         i = opt.best_frame if opt.best_frame is not None else find_best_frame(source_image, driving_video, cpu=opt.cpu)
         print ("Best frame: " + str(i))
@@ -153,5 +165,20 @@ if __name__ == "__main__":
         predictions = predictions_backward[::-1] + predictions_forward[1:]
     else:
         predictions = make_animation(source_image, driving_video, generator, kp_detector, relative=opt.relative, adapt_movement_scale=opt.adapt_scale, cpu=opt.cpu)
+    end_time = time.monotonic()
+    print('Animation created in {}'.format(timedelta(seconds=end_time - start_time)))
+
     imageio.mimsave(opt.result_video, [img_as_ubyte(frame) for frame in predictions], fps=fps)
+
+    # write video with audio
+    img_name = os.path.split(opt.source_image)[1].split('.')[0]
+    vid_name = os.path.split(opt.source_image)[1].split('.')[0]
+    path_out = os.path.join('DATA_outputs', img_name + '_driving-' + vid_name + '.mp4')
+
+    saved_mp4_read_back = mp.VideoFileClip(opt.result_video)
+    final_clip = saved_mp4_read_back.set_audio(audio_track)
+    print('Saving animation as .mp4 to {}'.format(path_out))
+    final_clip.write_videofile(path_out, fps=fps, verbose=False, logger=None)
+    remove_status = os.remove(opt.result_video)
+
 
