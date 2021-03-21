@@ -172,7 +172,7 @@ if __name__ == "__main__":
 
     # write video with audio
     img_name = os.path.split(opt.source_image)[1].split('.')[0]
-    vid_name = os.path.split(opt.source_image)[1].split('.')[0]
+    vid_name = os.path.split(opt.driving_video)[1].split('.')[0]
     path_out = os.path.join('DATA_outputs', img_name + '_driving-' + vid_name + '.mp4')
 
     saved_mp4_read_back = mp.VideoFileClip(opt.result_video)

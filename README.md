@@ -13,7 +13,7 @@ The original repo was quite easy to get it running and nicely documented, this j
 * Install [Anaconda3](https://www.anaconda.com/products/individual#windows) (if you have other Python 3.8 already, that is fine) ([installation instructions](https://docs.anaconda.com/anaconda/install/windows/))
 * Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), if you are `pull`ing this repo (you could just download the zip as well if you really do not know what this is)
 * Install [`ffmpeg`](https://ffmpeg.org/download.html) 
-* GO to terminal / command window here and execute the commands from there
+* GO to terminal / command window here and execute the commands from there (**NOTE!** all the path separators are in Linux/Mac syntax `/` instead of Windows' \\)
 
 ### Clone this repository
 
@@ -64,6 +64,8 @@ TODO! Maybe make a nicer wrapper and do all on one-go
 
 ![](doc/workflow.png)
 
+The prerequisites 1) and 2) need to be done only once per image, and once per video. Like with the "actually animating" you just use pre-cropped images and videos.
+
 #### Prerequisite 1) Crop your static image 
 
 E.g. portrait of yourself or some celebrity, "celebrity portrait" Google search gave young Stalin so it is our demo photo now
@@ -90,6 +92,21 @@ That script actually does not do any cropping _per se_ but give you the command 
 
 ```
 ffmpeg -i ./DATA_inputs/driving_videos/scatman.mp4 -ss 0.0 -t 8.8 -filter:v "crop=236:243:0:4, scale=256:256" ./DATA_inputs/driving_videos/scatman_crop.mp4
+```
+
+##### If you get multiple crop commands
+
+You need to manually rename the parts, e.g.
+
+```
+ffmpeg -i ./DATA_inputs/driving_videos/spit.mp4 -ss 0.0 -t 12.966666666666667 -filter:v "crop=1135:930:604:0, scale=256:256" crop1.mp4
+ffmpeg -i ./DATA_inputs/driving_videos/spit.mp4 -ss 13.1 -t 7.799999999999999 -filter:v "crop=1106:881:501:0, scale=256:256" crop2.mp4
+```
+
+and then combine back to a single mp4 file:
+
+```
+ffmpeg -i concat:"crop1.mp4|crop2.mp4" spit_crop.mp4
 ```
 
 #### Actually animate
