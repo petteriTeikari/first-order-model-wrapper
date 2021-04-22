@@ -12,13 +12,15 @@ The original repo was quite easy to get it running and nicely documented, this j
 
 ### Pre-prerequisites
 
-* Install [Anaconda3](https://www.anaconda.com/products/individual#windows) (if you have other Python 3.8 already, that is fine) ([installation instructions](https://docs.anaconda.com/anaconda/install/windows/))
+1) Install [Anaconda3.8 Linux](https://www.anaconda.com/products/individual/download-success) / [Anaconda3.8 Windows](https://www.anaconda.com/products/individual) (This is a Python "By data scientists, for data scientists" in practice, if you are familiar with Python, and have already installed Python from other source, this repo might work as well)
 
-* Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), if you are `pull`ing this repo (you could just download the zip as well if you really do not know what this is)
+* **Note!** If you are on Windows, the path variable will not be added automatically like on Ubuntu, and you get this famous [`“python” not recognized as a command`](https://stackoverflow.com/questions/7054424/python-not-recognized-as-a-command), so you could for example follow the instructions from [Datacamp](https://www.datacamp.com/community/tutorials/installing-anaconda-windows) on how to add Anaconda to Path (to your environmental variables). See even the [short video on this](https://youtu.be/mf5u2chPBjY?t=15m45s)
 
-* Install [`ffmpeg`](https://ffmpeg.org/download.html) 
+2) Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), if you are `pull`ing this repo (you could just download the zip as well if you really do not know what this is)
 
-* GO to terminal / command window here and execute the commands from there (**NOTE!** all the path separators are in Linux/Mac syntax `/` instead of Windows' \\)
+3) GO to terminal (Ctrl+Alt+T on Ubuntu) / command window ([Anaconda Prompt](https://problemsolvingwithpython.com/01-Orientation/01.03-Installing-Anaconda-on-Windows/) or [Microsoft Command Prompt](https://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/), i.e. the black window from the [DOS times](https://en.wikipedia.org/wiki/DOS) from last millennium that maybe Gen Z have never heard of) here and execute **all the following commands from there**.
+
+4) GO to terminal / command window here and execute the commands from there (**NOTE!** all the path separators are in Linux/Mac syntax `/` instead of Windows' \\)
 
 ### Clone this repository
 
