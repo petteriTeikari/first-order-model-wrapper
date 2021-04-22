@@ -8,11 +8,16 @@ See original repo notes in https://github.com/AliaksandrSiarohin/first-order-mod
 
 The original repo was quite easy to get it running and nicely documented, this just added the audio to the output. TODO! put everything behiund a single Python call on command window so there are no separate steps. If you are new to using code/AI for creative purposes, you might want to look at the [instructions for getting video style transfer to work](https://github.com/petteriTeikari/ReReVST-UX-Wrapper) to get maybe a bit better understand what all these components are that you need to install.
 
+**NOTE!** You might find the README.md too detailed, and it was written for people with very little experience in making code from online work for their purposes.
+
 ### Pre-prerequisites
 
 * Install [Anaconda3](https://www.anaconda.com/products/individual#windows) (if you have other Python 3.8 already, that is fine) ([installation instructions](https://docs.anaconda.com/anaconda/install/windows/))
+
 * Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), if you are `pull`ing this repo (you could just download the zip as well if you really do not know what this is)
+
 * Install [`ffmpeg`](https://ffmpeg.org/download.html) 
+
 * GO to terminal / command window here and execute the commands from there (**NOTE!** all the path separators are in Linux/Mac syntax `/` instead of Windows' \\)
 
 ### Clone this repository
@@ -29,6 +34,10 @@ Create virtual environment
 ```bash
 python3.8 -m venv venv-1stOrderModelMotion
 ```
+
+This is created now inside the repository `first-order-model-wrapper` folder
+
+![image](https://user-images.githubusercontent.com/1060514/115708548-d3380900-a378-11eb-80b3-80ca2422704b.png)
 
 Activate this created virtual environment, and start installing libraries to it:
 
@@ -96,7 +105,9 @@ pip install torch torchvision torchaudio
 
 * Download [`vox-cpk.pth.tar`](https://drive.google.com/file/d/1_v_xW1V52gZCZnXgh1Ap_gwA9YVIzUnS/view?usp=sharing) for face animation (provided by the original authors), and place the file to the subfolder `checkpoints`
 
-* For cropping and preprocessing a youtube video (to get the face from it), you need to install [`face-alignment`](https://github.com/1adrianb/face-alignment) library (comes as preloaded with [an issue fixed for you]()):
+![image](https://user-images.githubusercontent.com/1060514/115708627-eba82380-a378-11eb-98db-b106e51876df.png)
+
+* For cropping and preprocessing a youtube video (to get the face from it), you need to install [`face-alignment`](https://github.com/1adrianb/face-alignment) library (comes as preloaded with a small issue fixed for you):
 
 ```bash
 cd face-alignment
