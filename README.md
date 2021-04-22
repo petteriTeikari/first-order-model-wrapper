@@ -6,7 +6,7 @@ See original repo notes in https://github.com/AliaksandrSiarohin/first-order-mod
 
 ## Petteri's notes for getting the repo to work 
 
-The original repo was quite easy to get it running and nicely documented, this just added the audio to the output. TODO! put everything behiund a single Python call on command window so there are no separate steps.
+The original repo was quite easy to get it running and nicely documented, this just added the audio to the output. TODO! put everything behiund a single Python call on command window so there are no separate steps. If you are new to using code/AI for creative purposes, you might want to look at the [instructions for getting video style transfer to work](https://github.com/petteriTeikari/ReReVST-UX-Wrapper) to get maybe a bit better understand what all these components are that you need to install.
 
 ### Pre-prerequisites
 
@@ -24,10 +24,34 @@ cd first-order-model-wrapper
 
 ### Virtual environment setup
 
+Create virtual environment
+
 ```bash
 python3.8 -m venv venv-1stOrderModelMotion
+```
+
+Activate this created virtual environment, and start installing libraries to it:
+
+in Ubuntu:
+```
 source venv-1stOrderModelMotion/bin/activate
+```
+
+command in **Windows** [Pip and virtualenv on Windows](https://programwithus.com/learn/python/pip-virtualenv-windows) (`cd Scripts` - `activate` - `cd..`):
+
+```
+Scripts/activate
+```
+
+Upgrade the `pip` (automatic installer for all the libraries)
+
+```
 python3.8 -m pip install --upgrade pip
+```
+
+`requirements.txt` contains all the library version that were used to get this code working, if you go and improvise and install the latest libraries, this repository might not work, so use **exactly** the same versions to get started (you can upgrade libraries later if you feel like there is need for it)
+
+```
 pip install -r requirements.txt
 ```
 
@@ -35,15 +59,38 @@ pip install -r requirements.txt
 
 Check the one matching your OS and GPU situation
 
-![learn to code](doc/pytorch.png)
-
-https://pytorch.org/
-
-e.g. for Ubuntu 18.04 with a NVIDIA GPU
+Ubuntu 18.04 with a NVIDIA GPU
 
 ```
 pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
 ```
+
+Ubuntu 18.04 if you do not have NVIDIA GPU
+
+```
+pip install torch==1.8.0+cpu torchvision==0.9.0+cpu torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+Windows with NVIDIA GPU
+
+```
+pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio===0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+Windows without GPU
+
+```
+pip install torch==1.8.0+cpu torchvision==0.9.0+cpu torchaudio===0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+Mac, I guess you need to [install from PyTorch sources](https://github.com/pytorch/pytorch#from-source), if you want to run this on GPU.
+
+Mac with CPU:
+
+```
+pip install torch torchvision torchaudio
+```
+
 
 ### Other tasks to do 
 
